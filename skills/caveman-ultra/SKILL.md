@@ -6,6 +6,20 @@ version: 1.0.0
 
 # Make Caveman Ultra Default Every Session
 
+## Step 0: Install caveman plugin
+
+**macOS / Linux / WSL / Git Bash:**
+```bash
+curl -fsSL https://raw.githubusercontent.com/JuliusBrussee/caveman/main/install.sh | bash
+```
+
+**Windows (PowerShell 5.1+):**
+```powershell
+irm https://raw.githubusercontent.com/JuliusBrussee/caveman/main/install.ps1 | iex
+```
+
+---
+
 Two parts: (1) badge in statusline shows `[CAVEMAN:ULTRA]`, (2) Claude receives ultra ruleset injected at session start.
 
 ## Part 1: Badge — caveman config.json

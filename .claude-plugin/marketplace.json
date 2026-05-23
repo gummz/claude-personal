@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "claude-personal",
+  "description": "Personal Claude Code skills: statusline setup per OS, caveman ultra default.",
+  "owner": {
+    "name": "gummz",
+    "url": "https://github.com/gummz"
+  },
+  "plugins": [
+    {
+      "name": "claude-personal",
+      "description": "Personal skills: statusline-linux, statusline-windows, caveman-ultra.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

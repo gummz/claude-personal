@@ -48,9 +48,14 @@ After next session start, statusline shows `[CAVEMAN:ULTRA]` instead of `[CAVEMA
 
 ## Part 2: Context injection — SessionStart hook
 
-Badge alone doesn't inject ultra ruleset into Claude's context. Add a SessionStart hook to `~/.claude/settings.json` to pin ultra behavior every session.
+Badge alone doesn't inject ultra ruleset into Claude's context.
 
-**Windows** (`~/.claude/settings.json`):
+**If caveman plugin is installed** (recommended): `caveman-activate.js` handles context injection automatically — no extra hook needed. Setting `defaultMode: ultra` in `config.json` (Part 1) is sufficient.
+
+**Standalone install only** (no caveman plugin): Add a manual SessionStart hook to `~/.claude/settings.json`.
+
+<details>
+<summary>Standalone hook — Windows (PowerShell)</summary>
 
 ```json
 {
@@ -70,7 +75,10 @@ Badge alone doesn't inject ultra ruleset into Claude's context. Add a SessionSta
 }
 ```
 
-**Linux/macOS** (`~/.claude/settings.json`):
+</details>
+
+<details>
+<summary>Standalone hook — Linux/macOS</summary>
 
 ```json
 {
@@ -88,6 +96,8 @@ Badge alone doesn't inject ultra ruleset into Claude's context. Add a SessionSta
   }
 }
 ```
+
+</details>
 
 ## How they work together
 

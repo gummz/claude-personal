@@ -6,7 +6,7 @@ version: 1.0.0
 
 # Claude Code Statusline — Windows
 
-Displays `[CAVEMAN:ULTRA] [Sonnet 4.6] [Windows 11]` in the Claude Code statusline.
+Displays `[CAVEMAN:ULTRA] [Sonnet 4.6 | medium] [Windows 11]` in the Claude Code statusline.
 
 Requires [caveman plugin](https://github.com/JuliusBrussee/caveman) for the badge. Model + OS work without it.
 
@@ -17,7 +17,7 @@ Copy `examples/statusline.ps1` to `~/.claude/statusline.ps1` (`C:\Users\<usernam
 ### What the script does
 
 - **Caveman badge**: calls `~/.claude/hooks/caveman-statusline.ps1` (from caveman plugin). That script uses `[Console]::Write()` directly — it cannot be captured via PowerShell pipeline. Check `.caveman-active` flag file instead to know if badge printed, then add separator space.
-- **Model**: reads JSON from stdin (`$data.model`), regex-formats `claude-sonnet-4-6` → `Sonnet 4.6`. Model field may be string or object with `.id` — handle both.
+- **Model + effort**: reads JSON from stdin (`$data.model`), regex-formats `claude-sonnet-4-6` → `Sonnet 4.6`. Reads `effortLevel` from `~\.claude\settings.json` and displays as `[Sonnet 4.6 | medium]`. Model field may be string or object with `.id` — handle both.
 - **OS**: reads `[System.Environment]::OSVersion.Version.Build`, maps build number → human name.
 
 ### Critical pitfall: `$input` is reserved

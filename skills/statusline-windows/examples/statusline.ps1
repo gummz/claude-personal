@@ -5,15 +5,25 @@ $Esc = [char]27
 & "$env:USERPROFILE\.claude\hooks\caveman-statusline.ps1" 2>$null
 $cavActive = (Test-Path "$env:USERPROFILE\.claude\.caveman-active")
 
-# Model — format "claude-sonnet-4-6" → "Sonnet 4.6"
+# Model + effort — combined in one bracket
+# Format "claude-sonnet-4-6" → "Sonnet 4.6"
 $data = $raw | ConvertFrom-Json -ErrorAction SilentlyContinue
 $modelRaw = if ($data.model -is [string]) { $data.model } else { $data.model.id }
 if ($modelRaw -match 'claude-(\w+)-(\d+)-(\d+)') {
     $modelName = (Get-Culture).TextInfo.ToTitleCase($matches[1]) + ' ' + $matches[2] + '.' + $matches[3]
 } else { $modelName = $modelRaw }
+
+$settingsPath = "$env:USERPROFILE\.claude\settings.json"
+$effort = ''
+if (Test-Path $settingsPath) {
+    $settings = Get-Content $settingsPath -Raw | ConvertFrom-Json -ErrorAction SilentlyContinue
+    $effort = $settings.effortLevel
+}
+
 if ($modelName) {
     $sep = if ($cavActive) { ' ' } else { '' }
-    [Console]::Write("${sep}${Esc}[38;5;75m[$modelName]${Esc}[0m")
+    $label = if ($effort) { "$modelName | $effort" } else { $modelName }
+    [Console]::Write("${sep}${Esc}[38;5;75m[$label]${Esc}[0m")
 }
 
 # OS — map build number to human name

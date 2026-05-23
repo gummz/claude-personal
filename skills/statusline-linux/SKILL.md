@@ -6,7 +6,7 @@ version: 1.0.0
 
 # Claude Code Statusline — Linux / macOS
 
-Displays `[CAVEMAN:ULTRA] [claude-sonnet-4-6] [Linux]` in the Claude Code statusline.
+Displays `[CAVEMAN:ULTRA] [claude-sonnet-4-6 | medium] [Linux]` in the Claude Code statusline.
 
 Requires [caveman plugin](https://github.com/JuliusBrussee/caveman) for the badge. Model + OS work without it.
 
@@ -22,7 +22,7 @@ chmod +x ~/.claude/statusline.sh
 ### What the script does
 
 - **Caveman badge**: pipes stdin JSON to `~/.claude/hooks/caveman-statusline.sh` (from caveman plugin) and captures output. If non-empty, prints it with a trailing space separator.
-- **Model**: reads JSON from stdin via `python3`. Field `.model` may be a string (e.g. `"claude-sonnet-4-6"`) or an object with `.display_name`/`.id` — handles both. `jq` is not assumed present.
+- **Model + effort**: reads JSON from stdin via `python3`. Field `.model` may be a string (e.g. `"claude-sonnet-4-6"`) or an object with `.display_name`/`.id` — handles both. Reads `effortLevel` from `~/.claude/settings.json` and displays as `[claude-sonnet-4-6 | medium]`. `jq` is not assumed present.
 - **OS**: calls `uname -s` → `Linux` or `Darwin`.
 
 ### Critical pitfall: `jq` not assumed
